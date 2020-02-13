@@ -1,4 +1,5 @@
 using EasyPipeLine;
+using EasyPipeLine.deprecated;
 
 namespace test.EasyPipeLine.Handlers
 {

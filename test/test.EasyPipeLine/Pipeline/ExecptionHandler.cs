@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using EasyPipeLine;
+using EasyPipeLine.deprecated;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 

@@ -1,26 +1,26 @@
 using System;
 using System.Threading.Tasks;
 using EasyPipeLine;
+using EasyPipeLine.deprecated;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace test.EasyPipeLine.Handlers
 {
-    public class OrderLink :Link
+    public class ProducingLink : Link
     {
         protected override async Task InvokeAsync(ILinkData data)
         {
-            
-            Test.Logger.LogTrace(nameof(OrderLink));
+           Test.Logger .LogTrace(nameof(ProducingLink));
             
             if(!(data is OrderData order)) throw new ArgumentNullException();
+            order.State = nameof(ProducingLink);
             
-            order.State = nameof(OrderLink);
-            
-            Test.Logger.LogInformation($"State:{nameof(OrderLink)} objectState: " +
+            Test.Logger.LogInformation($"State:{nameof(ProducingLink)} objectState: " +
                               $"{JsonConvert.SerializeObject(order)}");
             await base.InvokeAsync(order);
         }
+        
     }
 }

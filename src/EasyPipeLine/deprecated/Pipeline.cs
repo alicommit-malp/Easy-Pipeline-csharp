@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace EasyPipeLine.deprecated
+namespace EasyPipeLine
 {
     public class Pipeline :Link
     {
