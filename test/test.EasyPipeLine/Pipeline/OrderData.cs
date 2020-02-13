@@ -1,9 +1,8 @@
 using EasyPipeLine;
-using EasyPipeLine.deprecated;
 
-namespace test.EasyPipeLine.Handlers
+namespace test.EasyPipeLine.Pipeline
 {
-    public class OrderData : ILinkData
+    public class OrderData : IPipelineData
     {
         public string Name { get; set; }
         public string State { get; set; }

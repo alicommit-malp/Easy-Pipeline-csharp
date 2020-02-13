@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace EasyPipeLine
+namespace EasyPipeLine.deprecated
 {
     [Obsolete("Handler class has been deprecated, please drive from Link class instead")]
     public abstract class Handler

@@ -4,13 +4,12 @@ using EasyPipeLine;
 using EasyPipeLine.deprecated;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using NUnit.Framework;
 
-namespace test.EasyPipeLine.Handlers
+namespace test.EasyPipeLine.Pipeline
 {
-    public class ProducingLink : Link
+    public class ProducingLink : WorkStation
     {
-        protected override async Task InvokeAsync(ILinkData data)
+        protected override async Task InvokeAsync(IPipelineData data)
         {
            Test.Logger .LogTrace(nameof(ProducingLink));
             

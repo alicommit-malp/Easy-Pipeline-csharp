@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
 
-namespace EasyPipeLine
+namespace EasyPipeLine.deprecated
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class Pipeline :Link
     {
         public Pipeline()

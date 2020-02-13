@@ -1,6 +1,6 @@
 namespace EasyPipeLine
 {
-    public interface ILinkData
+    public interface IPipelineData
     {
 
     }

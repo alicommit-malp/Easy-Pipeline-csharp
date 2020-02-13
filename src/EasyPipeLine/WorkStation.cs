@@ -2,32 +2,32 @@ using System.Threading.Tasks;
 
 namespace EasyPipeLine
 {
-    public abstract class Link
+    public abstract class WorkStation
     {
-        private Link _nextLink;
-        private Link _prevLink;
+        private WorkStation _nextWorkStation;
+        private WorkStation _prevWorkStation;
         protected bool IsRoot;
 
-        public Link Next(Link link)
+        public WorkStation Next(WorkStation workStation)
         {
-            _nextLink = link;
-            _nextLink._prevLink = this;
-            return _nextLink;
+            _nextWorkStation = workStation;
+            _nextWorkStation._prevWorkStation = this;
+            return _nextWorkStation;
         }
 
-        public async Task Run(ILinkData data)
+        public async Task Run(IPipelineData data)
         {
             if(IsRoot)
                await InvokeAsync(data);
             else
             {
-                _prevLink?.Run(data);
+                _prevWorkStation?.Run(data);
             }
         }
 
-        protected virtual async Task InvokeAsync(ILinkData data)
+        protected virtual async Task InvokeAsync(IPipelineData data)
         {
-            if (_nextLink != null) await _nextLink?.InvokeAsync(data);
+            if (_nextWorkStation != null) await _nextWorkStation?.InvokeAsync(data);
         }
     }
 }

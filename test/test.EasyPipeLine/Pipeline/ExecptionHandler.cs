@@ -1,15 +1,13 @@
 using System;
 using System.Threading.Tasks;
 using EasyPipeLine;
-using EasyPipeLine.deprecated;
 using Microsoft.Extensions.Logging;
-using NUnit.Framework;
 
 namespace test.EasyPipeLine.Handlers
 {
-    public class ExceptionLink : Link
+    public class ExceptionLink : WorkStation
     {
-        protected override async Task InvokeAsync(ILinkData data)
+        protected override async Task InvokeAsync(IPipelineData data)
         {
             Test.Logger.LogTrace(nameof(ExceptionLink));
             try
