@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using EasyPipeLine;
-using EasyPipeLine.deprecated;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using test.EasyPipeLine.Handlers;

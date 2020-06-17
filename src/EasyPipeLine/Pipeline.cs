@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using EasyPipeLine.deprecated;
 
 namespace EasyPipeLine
 {
