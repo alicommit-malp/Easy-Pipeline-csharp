@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <Title>Easy Pipeline creator</Title>
     <Authors>Ali Alp</Authors>
     <Description>An easy implementation of chain of responsibility with builder pattern which will give a ready to use pipeline foundation </Description>
@@ -12,8 +11,9 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>ChainOfResponsibility,Pipeline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>2.3.0</PackageVersion>
+    <PackageVersion>3.1.0</PackageVersion>
     <LangVersion>8</LangVersion>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
 </Project>
