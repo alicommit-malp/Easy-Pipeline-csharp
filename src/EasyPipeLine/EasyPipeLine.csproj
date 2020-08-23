@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+    
   <PropertyGroup>
     <Title>Easy Pipeline Creator</Title>
     <Authors>Ali Alp</Authors>
@@ -11,9 +11,9 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>ChainOfResponsibility,Pipeline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>3.1.1</PackageVersion>
+    <PackageVersion>3.2.0</PackageVersion>
     <LangVersion>8</LangVersion>
-    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
 </Project>

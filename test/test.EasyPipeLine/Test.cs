@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
-using test.EasyPipeLine.Handlers;
 using test.EasyPipeLine.Pipeline;
 
 namespace test.EasyPipeLine
@@ -21,13 +20,13 @@ namespace test.EasyPipeLine
             };
 
             await new global::EasyPipeLine.Pipeline()
-                .Next(new ExceptionLink())
-                .Next(new OrderLink())
-                .Next(new CheckoutLink())
-                .Next(new ProducingLink())
+                .Next(new OrderWorkStation())
+                .Next(new CheckoutWorkStation())
+                .Next(new ProducingWorkStation())
                 .Run(order);
 
-            Assert.AreEqual(nameof(ProducingLink), nameof(ProducingLink));
+
+            Assert.AreEqual(nameof(ProducingWorkStation), nameof(ProducingWorkStation));
         }
     }
 }

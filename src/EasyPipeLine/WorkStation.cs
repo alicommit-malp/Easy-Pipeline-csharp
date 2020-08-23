@@ -15,19 +15,16 @@ namespace EasyPipeLine
             return _nextWorkStation;
         }
 
-        public async Task Run(IPipelineData data)
+        public Task Run(IPipelineData data)
         {
-            if(IsRoot)
-               await InvokeAsync(data);
-            else
-            {
-                _prevWorkStation?.Run(data);
-            }
+            if (IsRoot) return InvokeAsync(data);
+            _prevWorkStation?.Run(data);
+            return Task.CompletedTask;
         }
 
-        protected virtual async Task InvokeAsync(IPipelineData data)
+        protected virtual  Task InvokeAsync(IPipelineData data)
         {
-            if (_nextWorkStation != null) await _nextWorkStation?.InvokeAsync(data);
+            return _nextWorkStation != null ? _nextWorkStation?.InvokeAsync(data) : Task.CompletedTask;
         }
     }
 }
