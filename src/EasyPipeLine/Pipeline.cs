@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EasyRetry;
 
 namespace EasyPipeLine
 {
@@ -23,15 +24,16 @@ namespace EasyPipeLine
         /// Run all the <see cref="WorkStation"/> in the order the have been added
         /// </summary>
         /// <param name="pipelineData">The data which will be passed between all the <see cref="WorkStation"/> <seealso cref="IPipelineData"/></param>
+        /// <param name="retryOptions"></param>
         /// <returns>A task which will be responsible for the whole execution of the pipeline</returns>
         /// <exception cref="EasyPipelineException"></exception>
-        public async Task Run(IPipelineData pipelineData)
+        public async Task Run(IPipelineData pipelineData,RetryOptions retryOptions=null)
         {
             while (_workStations.TryDequeue(out var workStation))
             {
                 try
                 {
-                    await workStation.InvokeAsync(pipelineData);
+                    await workStation.InvokeAsync(pipelineData).Retry(retryOptions);
                 }
                 catch (Exception e)
                 {
