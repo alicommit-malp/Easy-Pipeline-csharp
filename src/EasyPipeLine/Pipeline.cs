@@ -27,13 +27,24 @@ namespace EasyPipeLine
         /// <param name="retryOptions"></param>
         /// <returns>A task which will be responsible for the whole execution of the pipeline</returns>
         /// <exception cref="EasyPipelineException"></exception>
-        public async Task Run(IPipelineData pipelineData,RetryOptions retryOptions=null)
+        public async Task Run(IPipelineData pipelineData)
         {
             while (_workStations.TryDequeue(out var workStation))
             {
                 try
                 {
-                    await workStation.InvokeAsync(pipelineData).Retry(retryOptions);
+                    var retryAttribute =
+                        (AutoRetryAttribute) Attribute.GetCustomAttribute(workStation.GetType(),typeof (AutoRetryAttribute));
+
+                    //retry if demanded
+                    if (retryAttribute != null)
+                        await workStation.InvokeAsync(pipelineData).Retry(new RetryOptions()
+                        {
+                            Attempts = retryAttribute.Attempts,
+                            DelayBetweenRetries = TimeSpan.FromSeconds(retryAttribute.DelaySeconds),
+                        });
+                    else
+                        await workStation.InvokeAsync(pipelineData);
                 }
                 catch (Exception e)
                 {

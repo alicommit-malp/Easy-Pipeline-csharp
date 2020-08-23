@@ -8,6 +8,7 @@ namespace test.EasyPipeLine.Pipeline
 {
     public class ProducingWorkStation : WorkStation
     {
+        [AutoRetry(10, 3)]
         public override async Task InvokeAsync(IPipelineData data)
         {
             Test.Logger.LogTrace(nameof(ProducingWorkStation));

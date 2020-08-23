@@ -19,14 +19,13 @@ var order = new OrderData()
 };
 
 await new Pipeline()
-    .Next(new ExceptionHandler())
     .Next(new OrderHandler())
     .Next(new CheckoutHandler())
     .Next(new ProducingHandler())
     .Run(order);
 ```
 
-In above scenario the order object will travel through all the handlers starting from the ExceptionHandler and then OrderHandler and so on.
+In above scenario the order object will travel through all the handlers starting from the OrderHandler and then CheckoutHandler and so on.
 
 The order object must implement the IPipelineData interface 
 ```c#
@@ -40,6 +39,7 @@ and every WorkStation must inherit from WorkStation abstract class
 ```c#
 public class OrderWorkStation : WorkStation
 {
+    [AutoRetry(attempts: 3)]
     protected override async Task InvokeAsync(IPipelineData data)
     {
         if(!(data is OrderData order)) throw new ArgumentNullException();
@@ -49,11 +49,12 @@ public class OrderWorkStation : WorkStation
         Console.WriteLine($"State:{nameof(OrderHandler)} objectState: " +
                           $"{JsonConvert.SerializeObject(order)}");
 
-        //call the next workstation in the pipeline 
-        await base.InvokeAsync(data);
+        return Task.CompletedTask;
     }
 }
 ```
+
+As it can be seen by defining the AutoRetry attribute you can ask the pipeline to retry this workstation if it fails
 
 >Find the nuget [here](https://www.nuget.org/packages/EasyPipeLine)
 
