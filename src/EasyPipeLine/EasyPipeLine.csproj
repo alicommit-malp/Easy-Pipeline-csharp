@@ -11,13 +11,13 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>ChainOfResponsibility,Pipeline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>3.2.0</PackageVersion>
+    <PackageVersion>4.0.0</PackageVersion>
     <LangVersion>8</LangVersion>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
     
   <ItemGroup>
-    <PackageReference Include="EasyRetry" Version="1.0.1" />
+    <PackageReference Include="EasyRetry" Version="1.1.0" />
   </ItemGroup>
 
 </Project>
