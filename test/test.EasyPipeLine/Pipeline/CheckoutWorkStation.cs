@@ -8,7 +8,7 @@ namespace test.EasyPipeLine.Pipeline
 {
     public class CheckoutWorkStation : WorkStation
     {
-        protected override Task InvokeAsync(IPipelineData data)
+        public override Task InvokeAsync(IPipelineData data)
         {
             Test.Logger.LogTrace(nameof(CheckoutWorkStation));
             
@@ -17,8 +17,8 @@ namespace test.EasyPipeLine.Pipeline
             
             Test.Logger.LogInformation($"State:{nameof(CheckoutWorkStation)} objectState: " +
                               $"{JsonConvert.SerializeObject(order)}");
-            
-            return base.InvokeAsync(order);
+
+            return Task.CompletedTask;
         }
     }
 }

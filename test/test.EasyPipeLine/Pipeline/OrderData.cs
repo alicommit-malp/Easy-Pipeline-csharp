@@ -6,5 +6,6 @@ namespace test.EasyPipeLine.Pipeline
     {
         public string Name { get; set; }
         public string State { get; set; }
+        public int Digit { get; set; }    
     }
 }

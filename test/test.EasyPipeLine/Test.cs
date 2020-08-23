@@ -16,7 +16,8 @@ namespace test.EasyPipeLine
             var order = new OrderData()
             {
                 Name = "Coffee",
-                State = "None"
+                State = "None",
+                Digit = 0
             };
 
             await new global::EasyPipeLine.Pipeline()

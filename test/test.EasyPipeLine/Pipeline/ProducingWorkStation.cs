@@ -8,19 +8,22 @@ namespace test.EasyPipeLine.Pipeline
 {
     public class ProducingWorkStation : WorkStation
     {
-        protected override Task InvokeAsync(IPipelineData data)
+        public override async Task InvokeAsync(IPipelineData data)
         {
-           Test.Logger .LogTrace(nameof(ProducingWorkStation));
-            
-            if(!(data is OrderData order)) throw new ArgumentNullException();
+            Test.Logger.LogTrace(nameof(ProducingWorkStation));
+
+            if (!(data is OrderData order)) throw new ArgumentNullException();
             order.State = nameof(ProducingWorkStation);
-            
+
             Test.Logger.LogInformation(message: $"State:{nameof(ProducingWorkStation)} objectState: " +
-                                                $"{ JsonConvert.SerializeObject(order)}");
-            
-            // throw new Exception("random");
-            return base.InvokeAsync(order);
+                                                $"{JsonConvert.SerializeObject(order)}");
+
+            // var result = 1 / order.Digit;
+
+            await Task.Run(() =>
+            {
+                var result = 1 / order.Digit;
+            });
         }
-        
     }
 }

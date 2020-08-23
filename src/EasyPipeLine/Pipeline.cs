@@ -1,11 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace EasyPipeLine
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
-    public class Pipeline : WorkStation
+    public class Pipeline
     {
-        public Pipeline()
+        private readonly Queue<WorkStation> _workStations = new Queue<WorkStation>();
+
+        /// <summary>
+        /// Adding easily the <see cref="WorkStation"/> to the pipeline
+        /// </summary>
+        /// <param name="workStation">A step in the pipeline which must inherit from the <see cref="WorkStation"/> class</param>
+        /// <returns>This <see cref="Pipeline"/> to provide the builder pattern feature</returns>
+        public Pipeline Next(WorkStation workStation)
         {
-            IsRoot = true;
+            _workStations.Enqueue(workStation);
+            return this;
+        }
+
+        /// <summary>
+        /// Run all the <see cref="WorkStation"/> in the order the have been added
+        /// </summary>
+        /// <param name="pipelineData">The data which will be passed between all the <see cref="WorkStation"/> <seealso cref="IPipelineData"/></param>
+        /// <returns>A task which will be responsible for the whole execution of the pipeline</returns>
+        /// <exception cref="EasyPipelineException"></exception>
+        public async Task Run(IPipelineData pipelineData)
+        {
+            while (_workStations.TryDequeue(out var workStation))
+            {
+                try
+                {
+                    await workStation.InvokeAsync(pipelineData);
+                }
+                catch (Exception e)
+                {
+                    throw new EasyPipelineException(
+                        $"Pipeline has failed to continue please check inner exception for more details", e);
+                }
+            }
         }
     }
 }
